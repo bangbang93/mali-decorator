@@ -1,0 +1,34 @@
+{
+  "name": "mali-decorator",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bangbang93/mali-decorator.git"
+  },
+  "author": "bangbang93",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bangbang93/mali-decorator/issues"
+  },
+  "homepage": "https://github.com/bangbang93/mali-decorator#readme",
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "grpc": "^1.23.3",
+    "mali": "^0.19.0",
+    "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "mali": "^0.19.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  }
+}
