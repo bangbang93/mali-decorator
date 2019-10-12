@@ -4,11 +4,11 @@ import {EnumKeys} from './decorators'
 
 export {Service, Method, Req, Context} from './decorators'
 
-export function buildMiddleware(...services: Function[]) {
+export function buildMiddleware(...services: object[]) {
   const middleware = {}
   for (const service of services) {
     const s = {}
-    const proto = service.prototype
+    const proto = Object.getPrototypeOf(service)
     const methods: string[] = Reflect.getMetadata(EnumKeys.methods, proto)
     const name: string = Reflect.getMetadata(EnumKeys.name, service)
     for (const method of methods) {
@@ -23,7 +23,7 @@ export function buildMiddleware(...services: Function[]) {
         Reflect.getMetadata(EnumKeys.args, proto, method).forEach((argName, index) => {
           args[index] = ctx.req[argName]
         })
-        ctx.res = await Reflect.getMetadata(EnumKeys.fn, proto, method)(...args)
+        ctx.res = await Reflect.getMetadata(EnumKeys.fn, proto, method).apply(service, args)
       }
       middleware[name] = s
     }
