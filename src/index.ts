@@ -8,9 +8,9 @@ export function buildMiddleware(...services: object[]) {
   const middleware = {}
   for (const service of services) {
     const s = {}
-    const proto = Object.getPrototypeOf(service)
+    const proto = Reflect.getPrototypeOf(service)
     const methods: string[] = Reflect.getMetadata(EnumKeys.methods, proto)
-    const name: string = Reflect.getMetadata(EnumKeys.name, service)
+    const name: string = Reflect.getMetadata(EnumKeys.name, proto.constructor)
     for (const method of methods) {
       s[method] = async (ctx: Mali.Context) => {
         const ctxs = Reflect.getMetadata(EnumKeys.ctx, proto, method)
@@ -23,7 +23,7 @@ export function buildMiddleware(...services: object[]) {
         Reflect.getMetadata(EnumKeys.args, proto, method).forEach((argName, index) => {
           args[index] = ctx.req[argName]
         })
-        ctx.res = await Reflect.getMetadata(EnumKeys.fn, proto, method).apply(service, args)
+        ctx.res = await service[method](args)
       }
       middleware[name] = s
     }

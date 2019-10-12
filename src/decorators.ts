@@ -5,7 +5,6 @@ export enum EnumKeys {
   methods = 'malid:methods',
   args = 'malid:args',
   ctx = 'malid:ctx',
-  fn = 'malid:fn',
 }
 
 export function Service(name?: string) {
@@ -17,8 +16,6 @@ export function Service(name?: string) {
 
 export function Method() {
   return (target: object, name: string) => {
-    Reflect.defineMetadata(EnumKeys.fn, target[name].bind(target), target, name)
-
     const methods: string[] = Reflect.getMetadata(EnumKeys.methods, target) || []
     methods.push(name)
     Reflect.defineMetadata(EnumKeys.methods, methods, target)
