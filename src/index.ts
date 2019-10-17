@@ -23,7 +23,7 @@ export function buildMiddleware(...services: object[]) {
         Reflect.getMetadata(EnumKeys.args, proto, method).forEach((argName, index) => {
           args[index] = ctx.req[argName]
         })
-        ctx.res = await service[method](args)
+        ctx.res = await service[method](...args)
       }
       middleware[name] = s
     }
