@@ -14,10 +14,11 @@ export function Service(name?: string) {
   }
 }
 
-export function Method() {
+export function Method(methodName?: string) {
   return (target: object, name: string) => {
+    methodName = methodName || name
     const methods: string[] = Reflect.getMetadata(EnumKeys.methods, target) || []
-    methods.push(name)
+    methods.push(methodName)
     Reflect.defineMetadata(EnumKeys.methods, methods, target)
   }
 }
