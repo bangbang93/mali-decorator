@@ -20,13 +20,16 @@ export function buildMiddleware(...services: object[]) {
             args[ctxIndex] = ctx
           }
         }
-        Reflect.getMetadata(EnumKeys.args, proto, method).forEach((argName, index) => {
-          if (!argName) {
-            args[index] = ctx.req
-          } else {
-            args[index] = ctx.req[argName]
-          }
-        })
+        const argsMeta = Reflect.getMetadata(EnumKeys.args, proto, method)
+        if (argsMeta) {
+          argsMeta.forEach((argName, index) => {
+            if (!argName) {
+              args[index] = ctx.req
+            } else {
+              args[index] = ctx.req[argName]
+            }
+          })
+        }
         ctx.res = await service[method](...args)
       }
       middleware[name] = s
