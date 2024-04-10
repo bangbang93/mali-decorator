@@ -20,16 +20,16 @@
   },
   "homepage": "https://github.com/bangbang93/mali-decorator#readme",
   "devDependencies": {
-    "@types/node": "^12.7.5",
-    "grpc": "^1.23.3",
-    "mali": "^0.19.0",
-    "typescript": "^3.6.3"
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.4"
   },
   "peerDependencies": {
-    "mali": "^0.19.0"
+    "@grpc/grpc-js": "^1.10.6",
+    "@grpc/proto-loader": "^0.7.12",
+    "mali": "^0.47.1"
   },
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.2.2"
   },
   "files": [
     "lib/**"

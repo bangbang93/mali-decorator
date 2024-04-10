@@ -12,7 +12,7 @@ export function buildMiddleware(...services: object[]) {
     const methods: string[] = Reflect.getMetadata(EnumKeys.methods, proto)
     const name: string = Reflect.getMetadata(EnumKeys.name, proto.constructor)
     for (const method of methods) {
-      s[method] = async (ctx: Mali.Context) => {
+      s[method] = async (ctx: Mali.Context<unknown>) => {
         const ctxs = Reflect.getMetadata(EnumKeys.ctx, proto, method)
         const args = []
         if (ctxs) {
