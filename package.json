@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   },
   "author": "bangbang93",
   "license": "MIT",
+  "packageManager": "pnpm@11.20.0",
   "bugs": {
     "url": "https://github.com/bangbang93/mali-decorator/issues"
   },
